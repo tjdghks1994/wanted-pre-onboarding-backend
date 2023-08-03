@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/common_head :: common_header(~{::title},~{::link},~{::script})}">
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
+</head>
+<body>
+    <div class="loginForm">
+        <h2>로그인 페이지</h2>
+
+        <div>
+            <input type="text" name="username" class="form-input login-input" placeholder="아이디">
+        </div>
+        <div>
+            <input type="password" name="password" class="form-input login-input" placeholder="패스워드">
+        </div>
+
+        <button class="common-btn login-btn" type="button">로그인</button>
+
+        <li class="link-list">
+            <a class="login-links" th:href="@{/members/join}">회원가입</a>
+        </li>
+    </div>
+</body>
+</html>
