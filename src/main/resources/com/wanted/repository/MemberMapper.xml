@@ -8,7 +8,7 @@
     </insert>
 
     <select id="findById" resultType="Member">
-        SELECT MEMBER_NO, MEMBER_ID, MEMBER_ROLE
+        SELECT MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_ROLE
           FROM TB_MEMBER_INFO
          WHERE MEMBER_ID = #{memberId}
     </select>

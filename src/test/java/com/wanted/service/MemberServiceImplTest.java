@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberServiceImplTest {
 
     private final MemberService memberService;
+
     @Autowired
     public MemberServiceImplTest(MemberService memberService) {
         this.memberService = memberService;
@@ -35,5 +36,20 @@ class MemberServiceImplTest {
         Assertions.assertThat(saveMember.getMemberPw()).isNotEqualTo(joinForm.getJoinRawPw());
         Assertions.assertThat(findMember).isNotNull();
         Assertions.assertThat(saveMember).isEqualTo(findMember);
+    }
+
+    @Test
+    @DisplayName("로그인 테스트")
+    void login() {
+        // given
+        String username = "parktjdghks@naver.com";
+        String password = "tjdghks12";
+        String noUsername = "test@naver.com";
+        String password2 = "tjdghks12";
+        // when
+        String jwtToken = memberService.login(username, password);
+        // then
+        Assertions.assertThat(jwtToken).isNotBlank();
+        Assertions.assertThatThrownBy(() -> memberService.login(noUsername, password2)).isInstanceOf(IllegalArgumentException.class);
     }
 }
