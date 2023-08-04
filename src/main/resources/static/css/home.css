@@ -1,0 +1,19 @@
+h2 {
+    margin: 40px;
+}
+div {
+    margin-left: 40px;
+    font-weight: bold;
+}
+ul {
+    margin: 40px;
+    list-style: none;
+}
+ul li {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+ul li:hover {
+    color: #3D63E7;
+    font-weight: bold;
+}
