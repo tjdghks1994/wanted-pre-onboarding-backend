@@ -1,6 +1,7 @@
 package com.wanted.jwt;
 
 import io.jsonwebtoken.*;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,16 @@ public class JwtProvider {
         }
     }
     // Authorization Header 값 반환
+    // 만약 없는 경우, 쿠키에 있는 값 조회해서 반환
     public String resolveToken(HttpServletRequest request) {
+        if (request.getHeader("Authorization") == null) {
+            Cookie[] list = request.getCookies();
+            for (Cookie cookie : list) {
+                if (cookie.getName().equals("access_token")) {
+                    return "Bearer " + cookie.getValue();
+                }
+            }
+        }
         return request.getHeader("Authorization");
     }
     // jwt 생성
