@@ -3,6 +3,8 @@ package com.wanted.controller.api;
 import com.wanted.domain.JoinForm;
 import com.wanted.domain.LoginInfo;
 import com.wanted.service.MemberService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -51,7 +53,8 @@ public class MemberApiController {
         return new ResponseEntity<>("success", HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public ResponseEntity<String> loginProc(@Validated @RequestBody LoginInfo member, BindingResult bindingResult) {
+    public ResponseEntity<String> loginProc(@Validated @RequestBody LoginInfo member, BindingResult bindingResult,
+                                            HttpServletResponse response) {
         // 이메일 @ 포함 여부 체크
         if (!(member.getMemberId().contains("@"))) {
             bindingResult.rejectValue("memberId", "PatternFail", "@를 포함해야 합니다");
@@ -68,7 +71,13 @@ public class MemberApiController {
 
         // 로그인 성공 시 jwt 반환
         String loginJwt = memberService.login(member.getMemberId(), member.getMemberPw());
+        // 쿠키에 jwt 저장
+        Cookie cookie = new Cookie("access_token", loginJwt);
+        cookie.setMaxAge(60 * 30);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
 
-        return new ResponseEntity<>(loginJwt, HttpStatus.OK);
+        return new ResponseEntity<>("로그인에 성공하였습니다.", HttpStatus.OK);
     }
 }
