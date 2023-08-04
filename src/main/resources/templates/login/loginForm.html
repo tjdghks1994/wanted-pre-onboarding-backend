@@ -11,13 +11,13 @@
         <h2>로그인 페이지</h2>
 
         <div>
-            <input type="text" name="username" class="form-input login-input" placeholder="아이디">
+            <input type="text" id="memberId" name="username" class="form-input login-input" placeholder="아이디">
         </div>
         <div>
-            <input type="password" name="password" class="form-input login-input" placeholder="패스워드">
+            <input type="password" id="memberPw" name="password" class="form-input login-input" placeholder="패스워드">
         </div>
 
-        <button class="common-btn login-btn" type="button">로그인</button>
+        <button class="common-btn login-btn" type="button" onclick="loginProc();">로그인</button>
 
         <li class="link-list">
             <a class="login-links" th:href="@{/members/join}">회원가입</a>
