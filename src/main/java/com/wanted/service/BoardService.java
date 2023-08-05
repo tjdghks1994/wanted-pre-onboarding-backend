@@ -9,7 +9,7 @@ public interface BoardService {
     // 게시글 등록
     Long add(BoardAdd boardAdd, String memberId);
     // 게시글 조회
-    Optional<Board> findBoard(Long boardId);
+    BoardLookupInfo findBoard(String boardId);
     // 게시글 목록
     List<BoardViewInfo> findAllBoard(PageMakeVO pageMakeVO);
     // 게시글 전체 수
