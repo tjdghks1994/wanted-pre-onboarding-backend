@@ -23,4 +23,6 @@ public interface BoardMapper {
     int total();
     // 게시글 조회 수 증가
     void updateLookupCnt(Long boardId);
+    // 게시글 삭제
+    void delete(Long boardId);
 }
