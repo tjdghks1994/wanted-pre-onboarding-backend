@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardServiceImplTest {
 
     private final BoardService boardService;
+
     @Autowired
     public BoardServiceImplTest(BoardService boardService) {
         this.boardService = boardService;
@@ -41,5 +42,16 @@ class BoardServiceImplTest {
         // then
         Assertions.assertThatThrownBy(() -> boardService.add(boardAdd, noMemberId)).isInstanceOf(IllegalArgumentException.class);
         Assertions.assertThat(findBoard.getBoardId()).isEqualTo(addBoardId);
+    }
+
+    @Test
+    @DisplayName("게시글 삭제 테스트")
+    void remove() {
+        // given
+        String boardId = "12";
+        // when
+        boardService.removeBoard(boardId);
+        // then
+        Assertions.assertThatThrownBy(() -> boardService.findBoard(boardId)).isInstanceOf(IllegalArgumentException.class);
     }
 }
