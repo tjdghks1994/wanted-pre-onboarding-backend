@@ -1,9 +1,6 @@
 package com.wanted.repository;
 
-import com.wanted.domain.Board;
-import com.wanted.domain.BoardViewInfo;
-import com.wanted.domain.PageCriteria;
-import com.wanted.domain.PageMakeVO;
+import com.wanted.domain.*;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -39,10 +36,12 @@ class MyBatisBoardRepositoryTest {
         Long memberNo = 11L;
         // when
         boardRepository.save(board, memberNo);
-        Optional<Board> findBoard = boardRepository.findById(board.getBoardId());
+        Optional<BoardLookupInfo> findBoardLookup = boardRepository.findById(board.getBoardId());
+        Board findBoard = new Board();
+        findBoard.setBoardId(findBoardLookup.get().getBoardId());
         // then
-        Assertions.assertThat(findBoard).isPresent();
-        Assertions.assertThat(findBoard.get()).isEqualTo(board);
+        Assertions.assertThat(findBoardLookup).isPresent();
+        Assertions.assertThat(findBoard).isEqualTo(board);
     }
 
     @Test
@@ -54,8 +53,22 @@ class MyBatisBoardRepositoryTest {
         PageMakeVO pageMakeVO = new PageMakeVO(pageCriteria, totalBoardCnt);
         // when
         List<BoardViewInfo> allBoard = boardRepository.findAll(pageMakeVO);
-        allBoard.stream().forEach(boardViewInfo -> log.debug("BoardViewInfo = {}", boardViewInfo));
+//        allBoard.stream().forEach(boardViewInfo -> log.debug("BoardViewInfo = {}", boardViewInfo));
         // then
         Assertions.assertThat(allBoard.size()).isEqualTo(totalBoardCnt);
+    }
+
+    @Test
+    @DisplayName("게시글 조회 수 증가 테스트")
+    void updateLookupCnt() {
+        // given
+        Long boardId = 12L;
+        BoardLookupInfo updateBoard = boardRepository.findById(boardId).get();
+        Long updateBoardLookupCnt = updateBoard.getLookupCnt();
+        // when
+        boardRepository.updateLookupCnt(boardId);
+        BoardLookupInfo findBoard = boardRepository.findById(boardId).get();
+        // then
+        Assertions.assertThat(updateBoardLookupCnt + 1).isEqualTo(findBoard.getLookupCnt());
     }
 }
