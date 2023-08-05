@@ -15,7 +15,7 @@ function addBoard() {
         success: function (result, statusText, jqXHR) {
             alert(result);
             // 게시글 목록 페이지로 이동
-
+            window.location.href = '/board/list';
         },
         error: function (jqXHR, textStatus, errorThrown) {
             if (jqXHR.responseText != null) {
@@ -32,6 +32,7 @@ function cancelAdd() {
 
     if (isCancel) {
         // 게시글 목록 페이지로 이동 처리
+        window.location.href = '/board/list';
     }
 }
 

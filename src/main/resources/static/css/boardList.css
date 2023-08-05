@@ -1,0 +1,103 @@
+h2 {
+    margin: 40px 40px 0px;
+}
+section {
+    display: inline-block;
+    width: 1280px;
+    position: absolute;
+    left: 50%;
+    margin-left: -540px;
+}
+#board-list {
+    margin: 0px 0px 40px 0px;
+    background: #FFF;
+}
+#board-list-wrapper {
+    padding: 40px 21px;
+}
+#board-list-btn-wrapper #add-btn {
+    width: 82px;
+    background: #486FFA;
+    color: #FFF;
+    float: right;
+    height: 32px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.14px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+#board-list-tbl {
+    width: 100%;
+    height: 547px;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+#board-list-tbl th {
+    border-top: 1px solid #DEE2E5;
+    border-bottom: 1px solid #DEE2E5;
+    background: #F1F3F5;
+    padding: 8px 0px;
+}
+#board-list-tbl tr:last-child {
+    border-bottom: 1px solid #DEE2E5;
+}
+#board-list-tbl td {
+    padding: 8px 0px;
+    border-top: 1px solid #DEE2E5;
+    background: #FFF;
+    overflow: hidden;
+    color: #343A40;
+    text-overflow: ellipsis;
+    whitespace: nowrap;
+    font-size: 14px;
+    letter-spacing: -0.14px;
+}
+#board-list-tbl td:not(:nth-child(2)) {
+    text-align: center;
+}
+#board-list-tbl td:nth-child(2) {
+    padding-left: 10px;
+    cursor: pointer;
+}
+#board-list-tbl td:nth-child(2):hover {
+    color: #486FFA;
+    font-weight: bold;
+}
+#empty-list {
+    height: 100%;
+}
+#paging-wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+#paging-wrapper ul {
+    display: inline-block;
+    padding: 0px;
+}
+#paging-wrapper .pagination-btn {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    color: #ADB5BD;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.12px;
+    cursor: pointer;
+    margin: 0px 3px;
+}
+#paging-wrapper .pagination-btn a {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    padding: 6px 0px;
+    text-align: center;
+}
+#paging-wrapper .pagination-btn a.active,
+#paging-wrapper .pagination-btn a:hover {
+    border-radius: 300px;
+    background: #486FFA;
+    color: #FFF;
+}
