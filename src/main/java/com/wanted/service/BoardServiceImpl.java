@@ -57,4 +57,10 @@ public class BoardServiceImpl implements BoardService {
     public int getTotalBoardCnt() {
         return boardRepository.total();
     }
+
+    @Override
+    public void removeBoard(String boardId) {
+        Long boardIdLongValue = Long.valueOf(boardId);
+        boardRepository.delete(boardIdLongValue);
+    }
 }

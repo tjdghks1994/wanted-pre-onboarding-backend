@@ -14,4 +14,6 @@ public interface BoardService {
     List<BoardViewInfo> findAllBoard(PageMakeVO pageMakeVO);
     // 게시글 전체 수
     int getTotalBoardCnt();
+    // 게시글 삭제
+    void removeBoard(String boardId);
 }
