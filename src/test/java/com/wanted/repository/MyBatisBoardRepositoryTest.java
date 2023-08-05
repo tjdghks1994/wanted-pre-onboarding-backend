@@ -71,4 +71,16 @@ class MyBatisBoardRepositoryTest {
         // then
         Assertions.assertThat(updateBoardLookupCnt + 1).isEqualTo(findBoard.getLookupCnt());
     }
+
+    @Test
+    @DisplayName("게시글 삭제 테스트")
+    void delete() {
+        // given
+        Long boardId = 12L;
+        // when
+        boardRepository.delete(boardId);
+        Optional<BoardLookupInfo> findBoard = boardRepository.findById(boardId);
+        // then
+        Assertions.assertThat(findBoard.isPresent()).isFalse();
+    }
 }
