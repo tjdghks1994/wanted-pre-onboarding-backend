@@ -6,6 +6,7 @@ import com.wanted.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,13 +36,18 @@ public class BoardServiceImpl implements BoardService {
         return board.getBoardId();
     }
     @Override
-    public Optional<Board> findBoard(Long boardId) {
-        Optional<Board> findBoard = boardRepository.findById(boardId);
+    @Transactional
+    public BoardLookupInfo findBoard(String boardId) {
+        Long boardIdLongValue = Long.valueOf(boardId);
+        // 조회 수 1 증가
+        boardRepository.updateLookupCnt(boardIdLongValue);
+
+        Optional<BoardLookupInfo> findBoard = boardRepository.findById(boardIdLongValue);
         if (!findBoard.isPresent()) {
             throw new IllegalArgumentException(boardId + " 는 존재하지 않는 게시글입니다.");
         }
 
-        return findBoard;
+        return findBoard.get();
     }
     @Override
     public List<BoardViewInfo> findAllBoard(PageMakeVO pageMakeVO) {

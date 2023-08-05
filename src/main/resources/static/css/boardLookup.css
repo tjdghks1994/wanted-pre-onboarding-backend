@@ -11,20 +11,26 @@ article {
     background: #FFF;
     margin: 30px 0px;
 }
-#boardName {
-    width: 95%;
-    height: 36px;
-    padding-left: 16px;
-    border-radius: 4px;
-    border: 1px solid #DEE2E5;
-    background: #FFF;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
-#boardName::placeholder {
-    color: #ADB5BD;
+table tr {
+    background: #FFF;
+    color: #343A40;
     font-size: 14px;
     letter-spacing: -0.14px;
 }
-.board-add-btn, .board-cancel-btn {
+table td {
+    padding: 8px;
+    border-top: 1px solid #DEE2E5;
+    border-bottom: 1px solid #DEE2E5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    whitespace: nowrap;
+    font-size: 16px;
+}
+.board-modify-btn, .board-cancel-btn, .board-remove-btn {
     width: 94px;
     height: 35px;
     border-radius: 4px;
@@ -40,8 +46,13 @@ article {
     color: #495057;
     margin-right: 10px;
 }
-.board-add-btn {
+.board-modify-btn {
     background: #486FFA;
+    color: #FFF;
+}
+.board-remove-btn {
+    float: left;
+    background: #AE0000;
     color: #FFF;
 }
 .btn-wrapper {

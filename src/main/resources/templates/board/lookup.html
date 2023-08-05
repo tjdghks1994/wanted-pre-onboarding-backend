@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/common_head :: common_header(~{::title},~{::link},~{::script})}">
+  <meta charset="UTF-8">
+  <title>게시글 조회</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/boardLookup.css}">
+  <link th:href="@{/summernote/summernote-lite.css}" rel="stylesheet">
+  <script th:src="@{/summernote/summernote-lite.js}"></script>
+  <script type="text/javascript" th:src="@{/js/boardLookup.js}"></script>
+  <script th:inline="javascript">
+    const boardContents = [[${boardInfo.boardContents}]];
+  </script>
+</head>
+<body>
+  <section>
+    <h2>게시글 조회</h2>
+    <article>
+      <table th:attr="bid=${boardInfo.boardId}">
+        <colgroup>
+          <col style="width: 10%;">
+          <col >
+          <col style="width: 10%">
+          <col style="width: 15%">
+        </colgroup>
+        <tr>
+          <td>제목</td>
+          <td th:text="${boardInfo.boardTitle}"></td>
+          <td>작성자</td>
+          <td th:text="${boardInfo.memberId}"></td>
+        </tr>
+        <tr>
+          <td>수정일자</td>
+          <td th:text="${boardInfo.modifyDate}"></td>
+          <td>조회수</td>
+          <td th:text="${boardInfo.lookupCnt}"></td>
+        </tr>
+      </table>
+    </article>
+
+    <article id="board-editor-wrapper">
+      <div id="summernote"></div>
+    </article>
+
+    <div class="btn-wrapper">
+      <button type="button" class="board-cancel-btn" onclick="goBoardListPage();">목록으로</button>
+      <!-- 작성자만 수정, 삭제 버튼 표시 -->
+      <button th:if="${username == boardInfo.memberId}"
+              type="button" class="board-modify-btn" onclick="goBoardModifyPage();">수정하기</button>
+      <button th:if="${username == boardInfo.memberId}"
+              type="button" class="board-remove-btn" onclick="removeBoard();">삭제하기</button>
+    </div>
+  </section>
+</body>
+</html>

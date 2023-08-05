@@ -30,7 +30,7 @@
         </tr>
         <tr th:each="board : ${boardList}" th:attr="bid=${board.boardId}">
           <td th:text="${board.boardNum}"></td>
-          <td th:text="${board.boardTitle}" onclick="goBucketUpdateForm(this);"></td>
+          <td th:text="${board.boardTitle}" onclick="goBoardLookup(this);"></td>
           <td th:text="${board.memberId}"></td>
           <td th:text="${board.lookupCnt}"></td>
           <td th:text="${board.modifyDate}"></td>

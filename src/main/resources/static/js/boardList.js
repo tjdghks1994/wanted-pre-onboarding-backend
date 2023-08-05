@@ -12,3 +12,8 @@ function pageMove(pageBtn) {
 
     window.location.href = '/board/list?pageNum=' + pageVal;
 }
+
+function goBoardLookup(board) {
+    let boardId = $(board).parent('tr').attr('bid');
+    window.location.href = "/board?boardId=" + boardId;
+}

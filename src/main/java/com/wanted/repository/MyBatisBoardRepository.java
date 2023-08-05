@@ -1,6 +1,7 @@
 package com.wanted.repository;
 
 import com.wanted.domain.Board;
+import com.wanted.domain.BoardLookupInfo;
 import com.wanted.domain.BoardViewInfo;
 import com.wanted.domain.PageMakeVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class MyBatisBoardRepository implements BoardRepository {
     }
 
     @Override
-    public Optional<Board> findById(Long boardId) {
+    public Optional<BoardLookupInfo> findById(Long boardId) {
         return boardMapper.findById(boardId);
     }
 
@@ -33,5 +34,10 @@ public class MyBatisBoardRepository implements BoardRepository {
     @Override
     public int total() {
         return boardMapper.total();
+    }
+
+    @Override
+    public void updateLookupCnt(Long boardId) {
+        boardMapper.updateLookupCnt(boardId);
     }
 }

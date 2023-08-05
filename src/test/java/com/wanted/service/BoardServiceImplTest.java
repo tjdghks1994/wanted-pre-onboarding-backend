@@ -2,6 +2,7 @@ package com.wanted.service;
 
 import com.wanted.domain.Board;
 import com.wanted.domain.BoardAdd;
+import com.wanted.domain.BoardLookupInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -36,9 +37,9 @@ class BoardServiceImplTest {
         String noMemberId = "tasdfasdf@naver.com";  // 등록되지 않은 사용자
         // when
         Long addBoardId = boardService.add(boardAdd, memberId);
-        Optional<Board> findBoard = boardService.findBoard(addBoardId);
+        BoardLookupInfo findBoard = boardService.findBoard(String.valueOf(addBoardId));
         // then
         Assertions.assertThatThrownBy(() -> boardService.add(boardAdd, noMemberId)).isInstanceOf(IllegalArgumentException.class);
-        Assertions.assertThat(findBoard.get().getBoardId()).isEqualTo(addBoardId);
+        Assertions.assertThat(findBoard.getBoardId()).isEqualTo(addBoardId);
     }
 }
