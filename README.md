@@ -30,6 +30,7 @@
 ---
 ### 데이터베이스 테이블 구조
 
+<img width="617" alt="스크린샷 2023-08-06 오전 12 31 28" src="https://github.com/tjdghks1994/wanted-pre-onboarding-backend/assets/57320084/125433d0-0510-4971-8c6c-66214021fcd2">
 
 ---
 ### 구현한 API의 동작을 촬영한 데모 영상 링크
