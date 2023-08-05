@@ -78,6 +78,6 @@ public class MemberApiController {
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
 
-        return new ResponseEntity<>("로그인에 성공하였습니다.", HttpStatus.OK);
+        return new ResponseEntity<>(loginJwt, HttpStatus.OK);
     }
 }
