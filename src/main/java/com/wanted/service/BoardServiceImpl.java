@@ -39,8 +39,6 @@ public class BoardServiceImpl implements BoardService {
     @Transactional
     public BoardLookupInfo findBoard(String boardId) {
         Long boardIdLongValue = Long.valueOf(boardId);
-        // 조회 수 1 증가
-        boardRepository.updateLookupCnt(boardIdLongValue);
 
         Optional<BoardLookupInfo> findBoard = boardRepository.findById(boardIdLongValue);
         if (!findBoard.isPresent()) {
@@ -49,6 +47,13 @@ public class BoardServiceImpl implements BoardService {
 
         return findBoard.get();
     }
+
+    @Override
+    public void plusLookupCount(String boardId) {
+        Long boardIdLongValue = Long.valueOf(boardId);
+        boardRepository.updateLookupCnt(boardIdLongValue);
+    }
+
     @Override
     public List<BoardViewInfo> findAllBoard(PageMakeVO pageMakeVO) {
         return boardRepository.findAll(pageMakeVO);
@@ -62,5 +67,15 @@ public class BoardServiceImpl implements BoardService {
     public void removeBoard(String boardId) {
         Long boardIdLongValue = Long.valueOf(boardId);
         boardRepository.delete(boardIdLongValue);
+    }
+
+    @Override
+    public void changeBoard(BoardChangeInfo boardChangeInfo) {
+        Board board = new Board();
+        board.setBoardId(Long.valueOf(boardChangeInfo.getBoardId()));
+        board.setBoardTitle(boardChangeInfo.getBoardTitle());
+        board.setBoardContents(boardChangeInfo.getBoardContents());
+
+        boardRepository.update(board);
     }
 }
