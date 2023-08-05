@@ -83,4 +83,20 @@ class MyBatisBoardRepositoryTest {
         // then
         Assertions.assertThat(findBoard.isPresent()).isFalse();
     }
+
+    @Test
+    @DisplayName("게시글 수정 테스트")
+    void update() {
+        // given
+        Board board = new Board();
+        board.setBoardId(12L);
+        board.setBoardTitle("게시글 수정 테스트");
+        board.setBoardContents("<p>게시글 수정 테스트 진행 중</p>");
+        // when
+        boardRepository.update(board);
+        BoardLookupInfo findBoard = boardRepository.findById(board.getBoardId()).get();
+        // then
+        Assertions.assertThat(board.getBoardTitle()).isEqualTo(findBoard.getBoardTitle());
+        Assertions.assertThat(board.getBoardContents()).isEqualTo(findBoard.getBoardContents());
+    }
 }
