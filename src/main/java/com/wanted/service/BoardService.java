@@ -1,8 +1,8 @@
 package com.wanted.service;
 
-import com.wanted.domain.Board;
-import com.wanted.domain.BoardAdd;
+import com.wanted.domain.*;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BoardService {
@@ -10,4 +10,8 @@ public interface BoardService {
     Long add(BoardAdd boardAdd, String memberId);
     // 게시글 조회
     Optional<Board> findBoard(Long boardId);
+    // 게시글 목록
+    List<BoardViewInfo> findAllBoard(PageMakeVO pageMakeVO);
+    // 게시글 전체 수
+    int getTotalBoardCnt();
 }

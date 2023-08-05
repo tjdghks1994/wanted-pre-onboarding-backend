@@ -1,14 +1,13 @@
 package com.wanted.service;
 
-import com.wanted.domain.Board;
-import com.wanted.domain.BoardAdd;
-import com.wanted.domain.Member;
+import com.wanted.domain.*;
 import com.wanted.repository.BoardRepository;
 import com.wanted.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -43,5 +42,13 @@ public class BoardServiceImpl implements BoardService {
         }
 
         return findBoard;
+    }
+    @Override
+    public List<BoardViewInfo> findAllBoard(PageMakeVO pageMakeVO) {
+        return boardRepository.findAll(pageMakeVO);
+    }
+    @Override
+    public int getTotalBoardCnt() {
+        return boardRepository.total();
     }
 }
