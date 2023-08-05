@@ -1,18 +1,22 @@
 package com.wanted.controller;
 
+import com.wanted.domain.BoardLookupInfo;
 import com.wanted.domain.BoardViewInfo;
 import com.wanted.domain.PageCriteria;
 import com.wanted.domain.PageMakeVO;
 import com.wanted.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -46,4 +50,13 @@ public class BoardController {
 
         return "board/list";
     }
+    @GetMapping
+    public String lookupBoard(@RequestParam String boardId, Authentication authentication, Model model) {
+        BoardLookupInfo boardInfo = boardService.findBoard(boardId);
+        model.addAttribute("boardInfo", boardInfo);
+        model.addAttribute("username", authentication.getName());
+
+        return "board/lookup";
+    }
+
 }
