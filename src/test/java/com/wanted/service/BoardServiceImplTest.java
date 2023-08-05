@@ -2,6 +2,7 @@ package com.wanted.service;
 
 import com.wanted.domain.Board;
 import com.wanted.domain.BoardAdd;
+import com.wanted.domain.BoardChangeInfo;
 import com.wanted.domain.BoardLookupInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -53,5 +54,21 @@ class BoardServiceImplTest {
         boardService.removeBoard(boardId);
         // then
         Assertions.assertThatThrownBy(() -> boardService.findBoard(boardId)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("게시글 수정 테스트")
+    void change() {
+        // given
+        BoardChangeInfo boardChangeInfo = new BoardChangeInfo();
+        boardChangeInfo.setBoardId("12");
+        boardChangeInfo.setBoardTitle("게시글 수정 테스트~~~~");
+        boardChangeInfo.setBoardContents("<p>게시글 수정 테스트 진행</p>");
+        // when
+        boardService.changeBoard(boardChangeInfo);
+        BoardLookupInfo findBoard = boardService.findBoard(boardChangeInfo.getBoardId());
+        // then
+        Assertions.assertThat(boardChangeInfo.getBoardTitle()).isEqualTo(findBoard.getBoardTitle());
+        Assertions.assertThat(boardChangeInfo.getBoardContents()).isEqualTo(findBoard.getBoardContents());
     }
 }

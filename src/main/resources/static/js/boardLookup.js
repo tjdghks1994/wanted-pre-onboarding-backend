@@ -1,3 +1,9 @@
+function goBoardModifyPage() {
+    let boardId = document.getElementById('board-info-tbl').getAttribute('bid');
+    // 게시글 수정 페이지로 이동 처리
+    window.location.href = '/board/modifyForm?boardId=' + boardId;
+}
+
 function removeBoard() {
     let isRemove = confirm('정말 게시글을 삭제하시겠습니까?');
     if (isRemove) {
