@@ -50,8 +50,11 @@ public class BoardController {
 
         return "board/list";
     }
+
     @GetMapping("/lookup")
     public String lookupBoard(@RequestParam String boardId, Authentication authentication, Model model) {
+        // 게시글을 조회한 경우에만 조회 수 증가하도록 변경
+        boardService.plusLookupCount(boardId);
         BoardLookupInfo boardInfo = boardService.findBoard(boardId);
         model.addAttribute("boardInfo", boardInfo);
         model.addAttribute("username", authentication.getName());
@@ -59,4 +62,12 @@ public class BoardController {
         return "board/lookup";
     }
 
+    @GetMapping("/modifyForm")
+    public String modifyBoard(@RequestParam String boardId, Authentication authentication, Model model) {
+        BoardLookupInfo boardInfo = boardService.findBoard(boardId);
+        model.addAttribute("boardInfo", boardInfo);
+        model.addAttribute("username", authentication.getName());
+
+        return "board/modifyForm";
+    }
 }
