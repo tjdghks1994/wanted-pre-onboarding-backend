@@ -50,7 +50,7 @@ public class BoardController {
 
         return "board/list";
     }
-    @GetMapping
+    @GetMapping("/lookup")
     public String lookupBoard(@RequestParam String boardId, Authentication authentication, Model model) {
         BoardLookupInfo boardInfo = boardService.findBoard(boardId);
         model.addAttribute("boardInfo", boardInfo);
