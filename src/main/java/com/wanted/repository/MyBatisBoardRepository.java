@@ -45,4 +45,9 @@ public class MyBatisBoardRepository implements BoardRepository {
     public void delete(Long boardId) {
         boardMapper.delete(boardId);
     }
+
+    @Override
+    public void update(Board board) {
+        boardMapper.update(board);
+    }
 }
