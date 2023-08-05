@@ -9,7 +9,7 @@
         VALUES (#{board.boardTitle}, #{board.boardContents}, #{memberNo})
     </insert>
 
-    <select id="findById" resultType="Board">
+    <select id="findById" resultType="BoardLookupInfo">
         SELECT B.BOARD_ID, B.BOARD_TITLE, B.BOARD_CONTENTS, B.MODIFY_DATE, B.LOOKUP_CNT, M.MEMBER_ID
         FROM TB_BOARD_INFO B
                  JOIN TB_MEMBER_INFO M
@@ -40,4 +40,10 @@
         SELECT COUNT(*)
         FROM TB_BOARD_INFO
     </select>
+
+    <update id="updateLookupCnt">
+        UPDATE TB_BOARD_INFO
+           SET LOOKUP_CNT = LOOKUP_CNT+1
+         WHERE BOARD_ID = #{boardId}
+    </update>
 </mapper>
