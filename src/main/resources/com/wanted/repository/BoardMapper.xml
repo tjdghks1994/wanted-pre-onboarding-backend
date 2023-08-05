@@ -16,4 +16,28 @@
                       ON B.MEMBER_NO = M.MEMBER_NO
         WHERE B.BOARD_ID = #{boardId}
     </select>
+
+    <select id="findAll" resultType="BoardViewInfo">
+        SELECT boardList.*
+          FROM (
+            SELECT @ROWNUM2:=@ROWNUM2+1 RNUM, list.*
+              FROM (
+                SELECT @ROWNUM:=@ROWNUM+1 BOARD_NUM, board.*
+                  FROM (
+                    SELECT B.BOARD_ID, B.BOARD_TITLE, B.MODIFY_DATE, B.LOOKUP_CNT, M.MEMBER_ID
+                    FROM TB_BOARD_INFO B
+                    JOIN TB_MEMBER_INFO M
+                    ON B.MEMBER_NO = M.MEMBER_NO
+                ) board, (SELECT @ROWNUM := 0) R
+                ORDER BY BOARD_NUM DESC
+            ) list, (SELECT @ROWNUM2 := 0) R2
+        ) boardList
+        WHERE RNUM &gt; (#{paging.pageCriteria.pageNum}-1) * #{paging.pageCriteria.amount}
+          AND RNUM &lt;= #{paging.pageCriteria.pageNum} * #{paging.pageCriteria.amount}
+    </select>
+
+    <select id="total">
+        SELECT COUNT(*)
+        FROM TB_BOARD_INFO
+    </select>
 </mapper>
