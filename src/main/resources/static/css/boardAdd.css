@@ -5,8 +5,7 @@ section {
     display: inline-block;
     width: 1280px;
     position: absolute;
-    left: 50%;
-    margin-left: -540px;
+    left: calc(50% - 640px);
 }
 article {
     background: #FFF;
