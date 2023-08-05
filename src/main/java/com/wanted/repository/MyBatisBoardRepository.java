@@ -40,4 +40,9 @@ public class MyBatisBoardRepository implements BoardRepository {
     public void updateLookupCnt(Long boardId) {
         boardMapper.updateLookupCnt(boardId);
     }
+
+    @Override
+    public void delete(Long boardId) {
+        boardMapper.delete(boardId);
+    }
 }
