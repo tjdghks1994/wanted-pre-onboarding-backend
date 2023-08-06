@@ -25,3 +25,21 @@ function loginProc() {
         }
     });
 }
+
+function goLogin() {
+    $("#memberPw").on("keyup",function(key){
+        if(key.keyCode==13) {
+            loginProc();
+        }
+    });
+
+    $("#memberId").on("keyup",function(key){
+        if(key.keyCode==13) {
+            loginProc();
+        }
+    });
+}
+
+$(function () {
+    goLogin();
+});
