@@ -38,9 +38,11 @@ public class JwtProvider {
     public String resolveToken(HttpServletRequest request) {
         if (request.getHeader("Authorization") == null) {
             Cookie[] list = request.getCookies();
-            for (Cookie cookie : list) {
-                if (cookie.getName().equals("access_token")) {
-                    return "Bearer " + cookie.getValue();
+            if (list != null) {
+                for (Cookie cookie : list) {
+                    if (cookie.getName().equals("access_token")) {
+                        return "Bearer " + cookie.getValue();
+                    }
                 }
             }
         }
