@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
         // 회원 가입 전 이미 존재한 아이디 인지 체크
         Optional<Member> findById = memberRepository.findById(member.getMemberId());
         if (findById.isPresent()) { // 이미 존재
-            throw new IllegalArgumentException("alreadyExist Email = " + member.getMemberId());
+            throw new IllegalArgumentException("이미 가입된 이메일 입니다 = " + member.getMemberId());
         }
         // 회원 가입
         memberRepository.save(member);
