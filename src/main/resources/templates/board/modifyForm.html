@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/common_head :: common_header(~{::title},~{::link},~{::script})}">
+  <meta charset="UTF-8">
+  <title>게시글 수정</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/boardModify.css}">
+  <link th:href="@{/summernote/summernote-lite.css}" rel="stylesheet">
+  <script th:src="@{/summernote/summernote-lite.js}"></script>
+  <script type="text/javascript" th:src="@{/js/boardModify.js}"></script>
+  <script th:inline="javascript">
+    const boardContents = [[${boardInfo.boardContents}]];
+  </script>
+</head>
+<body>
+  <section id="board-info-section" th:attr="bid=${boardInfo.boardId}">
+    <h2>게시글 수정</h2>
+    <article>
+      <span class="board-content-txt" id="content-title">제목 : </span>
+      <input type="text" th:value="${boardInfo.boardTitle}" id="boardName">
+    </article>
+
+    <article id="bucket-editor-wrapper">
+      <div id="summernote"></div>
+    </article>
+
+    <div class="btn-wrapper">
+      <button type="button" class="board-cancel-btn" onclick="cancelModify();">취소</button>
+      <button type="button" th:if="${username == boardInfo.memberId}"
+              class="board-modify-btn" onclick="modifyBoard();">수정완료</button>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/common_head :: common_header(~{::title},~{::link},~{::script})}">
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/join.css}">
+  <script type="text/javascript" th:src="@{/js/join.js}"></script>
+</head>
+<body>
+
+<section>
+  <p class="join-text" th:text="${#messages.msg('label.join')}">회원가입</p>
+
+  <form>
+    <label class="join-label" th:text="${#messages.msg('label.email')}">이메일</label>
+    <input type="text" id="mail-input" class="join-email" placeholder="이메일을 입력해주세요.">
+    <p class="join-explication" th:text="${#messages.msg('explication.email')}"
+       id="email-exp" style="margin-bottom: 20px;">아이디로 사용할 이메일을 입력해주세요.</p>
+
+    <label class="join-label" th:text="${#messages.msg('label.password')}">비밀번호</label>
+    <input type="password" id="raw-pw" class="join-input" placeholder="비밀번호">
+    <p class="join-explication" th:text="${#messages.msg('explication.password')}">8자 이상의 비밀번호를 입력해주세요.</p>
+
+    <button type="button" id="join-exec-btn" class="common-btn join-btn-active" onclick="joinProc();"
+            style="margin-bottom: 20px;" th:text="${#messages.msg('label.join')}">회원 가입</button>
+    <div style="margin-bottom: 160px;">
+      <a id="gotoLogin" th:href="@{/members/login}" th:text="${#messages.msg('label.gotoLogin')}">로그인 바로가기</a>
+    </div>
+  </form>
+</section>
+</body>
+</html>

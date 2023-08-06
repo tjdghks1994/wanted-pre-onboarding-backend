@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/common_head :: common_header(~{::title},~{::link},~{::script})}">
+    <meta charset="UTF-8">
+    <title>홈</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
+    <script type="text/javascript" th:src="@{/js/home.js}"></script>
+</head>
+<body>
+
+    <h2>메인 페이지</h2>
+    <div><span th:text="${username}"></span> <span> 님 반갑습니다. </span></div>
+
+    <ul>
+        <li onclick="goBoardListPage();">게시글 목록보기</li>
+        <li onclick="goBoardAddPage();">게시글 등록하기</li>
+    </ul>
+</body>
+</html>

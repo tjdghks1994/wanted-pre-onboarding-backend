@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/common_head :: common_header(~{::title},~{::link},~{::script})}">
+    <meta charset="UTF-8">
+    <title>게시글 등록</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/boardAdd.css}">
+    <link th:href="@{/summernote/summernote-lite.css}" rel="stylesheet">
+    <script th:src="@{/summernote/summernote-lite.js}"></script>
+    <script type="text/javascript" th:src="@{/js/boardAdd.js}"></script>
+</head>
+<body>
+<section>
+    <h2>게시글 작성</h2>
+    <article>
+        <span class="board-content-txt" id="content-title">제목 : </span>
+        <input type="text" placeholder="제목 입력" id="boardName">
+    </article>
+
+    <article id="bucket-editor-wrapper">
+        <div id="summernote"></div>
+    </article>
+
+    <div class="btn-wrapper">
+        <button type="button" class="board-cancel-btn" onclick="cancelAdd();">취소</button>
+        <button type="button" class="board-add-btn" onclick="addBoard();">등록</button>
+    </div>
+</section>
+</body>
+</html>

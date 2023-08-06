@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/common_head :: common_header(~{::title},~{::link},~{::script})}">
+  <meta charset="UTF-8">
+  <title>게시글 목록</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/boardList.css}">
+  <script type="text/javascript" th:src="@{/js/boardList.js}"></script>
+</head>
+<body>
+  <h2>게시글 목록</h2>
+  <article id="board-list">
+    <div id="board-list-wrapper">
+      <div id="board-list-btn-wrapper">
+        <button type="button" id="add-btn" onclick="goBucketAddForm()">글 쓰기</button>
+      </div>
+      <table id="board-list-tbl">
+        <colgroup>
+          <col style="width: 5%;">
+          <col>
+          <col style="width: 15%">
+          <col style="width: 10%">
+          <col style="width: 15%">
+        </colgroup>
+        <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>조회수</th>
+          <th>수정일</th>
+        </tr>
+        <tr th:each="board : ${boardList}" th:attr="bid=${board.boardId}">
+          <td th:text="${board.boardNum}"></td>
+          <td th:text="${board.boardTitle}" onclick="goBoardLookup(this);"></td>
+          <td th:text="${board.memberId}"></td>
+          <td th:text="${board.lookupCnt}"></td>
+          <td th:text="${board.modifyDate}"></td>
+        </tr>
+        <tr id="empty-list"></tr>
+      </table>
+
+      <div id="paging-wrapper">
+        <ul>
+          <li class="pagination-btn"> <a th:value="${pageMake.firstPage}" onclick="pageMove(this);"><<</a> </li>
+          <li class="pagination-btn"> <a th:value="${pageMake.prevPage}" onclick="pageMove(this);"><</a> </li>
+          <th:block th:with="start = ${pageMake.startPage}, end = ${pageMake.endPage}">
+            <li class="pagination-btn"
+                th:with="start = ${pageMake.startPage}, end = ${pageMake.endPage}"
+                th:each="pageButton : ${#numbers.sequence(start, end)}">
+              <a th:classappend="${pageButton == pageMake.pageCriteria.pageNum} ? 'active' : ''"
+                 th:text="${pageButton}" th:value="${pageButton}" onclick="pageMove(this);"></a>
+            </li>
+          </th:block>
+          <li class="pagination-btn"> <a th:value="${pageMake.nextPage}" onclick="pageMove(this);">></a> </li>
+          <li class="pagination-btn"> <a th:value="${pageMake.lastPage}" onclick="pageMove(this);">>></a></li>
+        </ul>
+      </div>
+    </div>
+  </article> <!-- board-list -->
+</body>
+</html>
