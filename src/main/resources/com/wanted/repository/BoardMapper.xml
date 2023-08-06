@@ -27,7 +27,8 @@
                     SELECT B.BOARD_ID, B.BOARD_TITLE, B.MODIFY_DATE, B.LOOKUP_CNT, M.MEMBER_ID
                     FROM TB_BOARD_INFO B
                     JOIN TB_MEMBER_INFO M
-                    ON B.MEMBER_NO = M.MEMBER_NO
+                      ON B.MEMBER_NO = M.MEMBER_NO
+                      ORDER BY BOARD_ID
                 ) board, (SELECT @ROWNUM := 0) R
                 ORDER BY BOARD_NUM DESC
             ) list, (SELECT @ROWNUM2 := 0) R2
