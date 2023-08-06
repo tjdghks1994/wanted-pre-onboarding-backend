@@ -7,6 +7,7 @@
 
 ---
 ### 애플리케이션 실행 방법
+AWS에 배포한 애플리케이션 주소 : http://43.201.186.149/members/login
 1. 사용자 회원가입 엔드포인트
    - 회원가입 페이지 : /members/join (GET)
    - 회원가입 : /members/join (POST)
@@ -21,12 +22,12 @@
    - 게시글 목록 : /board (GET)
 5. 특정 게시글을 조회하는 엔드포인트
    - 게시글 조회 페이지 : /board/lookup (GET)
-   - 게시글 조회 : /board/${boardId} (GET)
+   - 게시글 조회 : /board/{boardId} (GET)
 6. 특정 게시글을 수정하는 엔드포인트
    - 게시글 수정 페이지 : /board/modifyForm    (GET)
    - 게시글 수정 : /board   (PATCH)
 7. 특정 게시글을 삭제하는 엔드포인트
-   - 게시글 삭제 : /board   (DELETE)
+   - 게시글 삭제 : /board/{boardId}   (DELETE)
 ---
 ### 데이터베이스 테이블 구조
 
@@ -38,7 +39,25 @@
 
 ---
 ### 구현 방법 및 이유에 대한 간략한 설명
-
+1. 회원가입시 요구사항인 검증처리를 위해 검증로직을 편리하게 적용할 수 있는 스프링이 제공하는
+   BindingResult와 BeanValidation을 활용하였습니다.
+2. 회원가입시 사용자 패스워드를 암호화하여 저장하기 위해 스프링 시큐리티에서 제공하는
+   PasswordEncoder 구현체인 BCryptPasswordEncoder를 활용하여 단방향 암호화방식으로
+   암호화된 패스워드를 DB에 저장하도록 구현했습니다. <br>
+   양방향 암호화방식일 경우 복호화키를 알면 암호화된 패스워드를 평문으로 복호화 할 수 있기 때문에,
+   양방향 암호화방식이 아닌 단방향 암호화방식을 채택하였습니다.
+3. 사용자 로그인 성공 시 JWT 토큰을 반환하기 위해 jsonwebtoken 라이브러리를 활용했습니다.
+4. 사용자 로그인 시 요구사항인 검증처리를 위해서도 회원가입과 동일하게 스프링이 제공하는
+   BindingResult와 BeanValidation을 활용하였습니다.
+5. jwt방식을 사용하기 위해 스프링 시큐리티의 설정을 변경하였는데, 
+   form로그인 방식 비활성화, http basic 방식 비활성화, 세션 비활성화 설정하였습니다.
+6. 로그인 이후 게시글과 관련된 기능을 사용하기 위해서는 Authorization 헤더에 jwt토큰이 유효한지
+   확인하기 위한 Filter를 추가했습니다.
+7. REST API에서 발생하는 예외를 한 곳에서 처리하기 위해 @RestControllerAdvice 와 
+   @ExceptionHandler 를 활용한 클래스를 사용했습니다.
+8. DB 접속정보를 암호화 하기 위해 Jasypt 라이브러리를 활용하였으며, 해당 암호화 방식은 양방향
+   암호화 방식이므로, 암호화에 필요한 Key가 있어야 했으며, 해당 Key를 소스코드에 보관할 수 없어 
+   배포한 AWS EC2 서버에 환경변수로 등록하여 사용하도록 했다.
 
 ---
 ### API 명세(request/response 포함)
