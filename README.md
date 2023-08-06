@@ -74,14 +74,14 @@
 
 6. 특정 게시글 수정
 
-   | Method | End Point | Header                                                           | Request Body                                                                                                        | Response Body    | status code & exception                                             |
-   |--------|-----------|---------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|------------------|---------------------------------------------------------------------|
-   | PATCH  | /board    | Content-Type : application/json Authorization : Bearer 로그인 생성 시 반환된 jwt문자열 | {"boardId":"11", "boardTitle":"게시글 수정 테스트 POSTMAN", "boardContents":"게시글 수정ㅎㅎ", "writerId":"parktjdghks@naver.com"} | 수정 성공 메시지 | BAD_REQUEST(400) : 작성자 ID와 수정하려는 ID(로그인 ID)가 다른 경우 |
+   | Method | End Point | Header                                                           | Request Body                                                                     | Response Body    | status code & exception                                             |
+   |--------|-----------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|------------------|---------------------------------------------------------------------|
+   | PATCH  | /board    | Content-Type : application/json Authorization : Bearer 로그인 생성 시 반환된 jwt문자열 | {"boardId":"11", "boardTitle":"게시글 수정 테스트 POSTMAN", "boardContents":"게시글 수정ㅎㅎ" } | 수정 성공 메시지 | BAD_REQUEST(400) : 작성자 ID와 수정하려는 ID(로그인 ID)가 다른 경우 |
 
 7. 특정 게시글 삭제
 
-   | Method | End Point | Header                                                           | Request Body                                                            | Response Body    | status code & exception                                             |
-   |--------|-----------|------------------------------------------------------------------|-------------------------------------------------------------------------|------------------|---------------------------------------------------------------------|
-   | DELETE | /board    | Content-Type : application/json Authorization : Bearer 로그인 생성 시 반환된 jwt문자열 | { "boardId":"삭제할 게시글 ID" ,  "writerId": "parktjdghks@naver.com" } | 삭제 성공 메시지 | BAD_REQUEST(400) : 작성자 ID와 삭제하려는 ID(로그인 ID)가 다른 경우 |
+   | Method | End Point | Header                                                           | Request Body                                                           | Response Body    | status code & exception                                             |
+   |--------|-----------|-----------------------------------------------------------------|-------------------------------------------------------------------------|------------------|---------------------------------------------------------------------|
+   | DELETE | /board/{boardId}    | Content-Type : application/json Authorization : Bearer 로그인 생성 시 반환된 jwt문자열 | | 삭제 성공 메시지 | BAD_REQUEST(400) : 작성자 ID와 삭제하려는 ID(로그인 ID)가 다른 경우 |
 
 ---
