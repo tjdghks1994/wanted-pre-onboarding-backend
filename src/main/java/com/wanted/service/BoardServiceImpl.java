@@ -64,13 +64,35 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void removeBoard(String boardId) {
+    public void removeBoard(String boardId, String loginId) {
         Long boardIdLongValue = Long.valueOf(boardId);
+
+        Optional<BoardLookupInfo> findBoard = boardRepository.findById(boardIdLongValue);
+        if (!findBoard.isPresent()) {
+            throw new IllegalArgumentException(boardId + " 는 존재하지 않는 게시글입니다.");
+        }
+        String writerId = findBoard.get().getMemberId();
+        if (!writerId.equals(loginId)) {
+            throw new IllegalArgumentException("삭제에 실패했습니다. 해당 게시글은 " + writerId + " 님만 삭제할 수 있습니다.");
+        }
+        // 문제 없을 시 게시글 삭제
         boardRepository.delete(boardIdLongValue);
     }
 
     @Override
-    public void changeBoard(BoardChangeInfo boardChangeInfo) {
+    public void changeBoard(BoardChangeInfo boardChangeInfo, String loginId) {
+        Long boardIdLongValue = Long.valueOf(boardChangeInfo.getBoardId());
+        Optional<BoardLookupInfo> findBoard = boardRepository.findById(boardIdLongValue);
+
+        if (!findBoard.isPresent()) {
+            throw new IllegalArgumentException(boardIdLongValue + " 는 존재하지 않는 게시글입니다.");
+        }
+
+        String writerId = findBoard.get().getMemberId();
+        if (!writerId.equals(loginId)) {
+            throw new IllegalArgumentException("수정에 실패했습니다. 해당 게시글은 " + writerId + " 님만 수정할 수 있습니다.");
+        }
+
         Board board = new Board();
         board.setBoardId(Long.valueOf(boardChangeInfo.getBoardId()));
         board.setBoardTitle(boardChangeInfo.getBoardTitle());

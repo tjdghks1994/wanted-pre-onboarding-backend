@@ -50,8 +50,9 @@ class BoardServiceImplTest {
     void remove() {
         // given
         String boardId = "12";
+        String loginId = "parktjdghks@naver.com";
         // when
-        boardService.removeBoard(boardId);
+        boardService.removeBoard(boardId, loginId);
         // then
         Assertions.assertThatThrownBy(() -> boardService.findBoard(boardId)).isInstanceOf(IllegalArgumentException.class);
     }
@@ -60,12 +61,13 @@ class BoardServiceImplTest {
     @DisplayName("게시글 수정 테스트")
     void change() {
         // given
+        String loginID = "parktjdghks@naver.com";
         BoardChangeInfo boardChangeInfo = new BoardChangeInfo();
         boardChangeInfo.setBoardId("12");
         boardChangeInfo.setBoardTitle("게시글 수정 테스트~~~~");
         boardChangeInfo.setBoardContents("<p>게시글 수정 테스트 진행</p>");
         // when
-        boardService.changeBoard(boardChangeInfo);
+        boardService.changeBoard(boardChangeInfo, loginID);
         BoardLookupInfo findBoard = boardService.findBoard(boardChangeInfo.getBoardId());
         // then
         Assertions.assertThat(boardChangeInfo.getBoardTitle()).isEqualTo(findBoard.getBoardTitle());

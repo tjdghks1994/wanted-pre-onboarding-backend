@@ -8,18 +8,10 @@ function removeBoard() {
     let isRemove = confirm('정말 게시글을 삭제하시겠습니까?');
     if (isRemove) {
         let boardId = document.getElementById('board-info-tbl').getAttribute('bid');
-        let writerId = document.getElementById('board-writer').innerText;
-
-        let removeInfo = {
-            "boardId": boardId,
-            "writerId": writerId
-        };
 
         $.ajax({
-            url: "/board",
+            url: "/board/"+boardId,
             method: "delete",
-            contentType: "application/json",
-            data: JSON.stringify(removeInfo),
             success: function (result, statusText, jqXHR) {
                 alert(result);
                 // 게시글 삭제 완료하여 게시글 목록 페이지로 이동

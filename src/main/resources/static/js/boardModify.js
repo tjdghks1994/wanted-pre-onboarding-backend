@@ -6,8 +6,7 @@ function modifyBoard() {
     let boardChangeInfo = {
         "boardId": boardId,
         "boardTitle": boardTitle,
-        "boardContents": boardContents,
-        "writerId": writerId
+        "boardContents": boardContents
     };
 
     $.ajax({
