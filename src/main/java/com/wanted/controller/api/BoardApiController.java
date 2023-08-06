@@ -21,7 +21,7 @@ public class BoardApiController {
      * 게시글 조회   /board/{boardId}    GET
      * 게시글 목록   /board              GET
      * 게시글 등록   /board              POST
-     * 게시글 삭제   /board              DELETE
+     * 게시글 삭제   /board/{boardId}    DELETE
      * 게시글 수정   /board              PATCH
      */
     private final BoardService boardService;
@@ -58,32 +58,20 @@ public class BoardApiController {
         return boardInfo;
     }
 
-    @DeleteMapping
-    public String removeBoard(@RequestBody BoardRemoveInfo removeInfo, Authentication authentication) {
-        String writerId = removeInfo.getWriterId(); // 게시글 작성자 ID
+    @DeleteMapping("/{boardId}")
+    public String removeBoard(@PathVariable String boardId, Authentication authentication) {
         String loginId = authentication.getName();  // 로그인한 ID
-        String boardId = removeInfo.getBoardId();
-        // 로그인 ID와 게시글 작성자 ID가 다른 경우 오류 (삭제 불가)
-        if (!writerId.equals(loginId)) {
-            throw new IllegalArgumentException("삭제에 실패했습니다. 해당 게시글은 " + writerId + " 님만 삭제할 수 있습니다.");
-        }
         // 게시글 삭제
-        boardService.removeBoard(boardId);
+        boardService.removeBoard(boardId, loginId);
 
         return "게시글이 삭제 되었습니다.";
     }
 
     @PatchMapping
     public String changeBoard(@RequestBody BoardChangeInfo boardChangeInfo, Authentication authentication) {
-        String writeId = boardChangeInfo.getWriterId(); // 게시글 작성자 ID
         String loginId = authentication.getName();  // 로그인한 ID
-
-        // 게시글 작성자 ID와 로그인 ID가 다른 경우 오류 (수정 불가)
-        if (!writeId.equals(loginId)) {
-            throw new IllegalArgumentException("수정에 실패했습니다. 해당 게시글은 " + writeId + " 님만 수정할 수 있습니다.");
-        }
         // 게시글 수정
-        boardService.changeBoard(boardChangeInfo);
+        boardService.changeBoard(boardChangeInfo, loginId);
 
         return "게시글이 수정 되었습니다.";
     }

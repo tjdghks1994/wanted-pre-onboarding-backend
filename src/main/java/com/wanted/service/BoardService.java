@@ -17,7 +17,7 @@ public interface BoardService {
     // 게시글 전체 수
     int getTotalBoardCnt();
     // 게시글 삭제
-    void removeBoard(String boardId);
+    void removeBoard(String boardId, String loginId);
     // 게시글 수정
-    void changeBoard(BoardChangeInfo boardChangeInfo);
+    void changeBoard(BoardChangeInfo boardChangeInfo, String loginId);
 }
