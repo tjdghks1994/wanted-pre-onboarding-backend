@@ -6,8 +6,12 @@
 박성환
 
 ---
-### 애플리케이션 실행 방법
+### AWS 배포
 AWS에 배포한 애플리케이션 주소 : http://43.201.186.149/members/login
+
+<img width="300" alt="스크린샷 2023-08-06 오후 5 22 18" src="https://github.com/tjdghks1994/wanted-pre-onboarding-backend/assets/57320084/d8e3fcba-2e3e-4ddb-ba5b-b81673f4d75f">
+
+### 애플리케이션 실행 방법
 1. 사용자 회원가입 엔드포인트
    - 회원가입 페이지 : /members/join (GET)
    - 회원가입 : /members/join (POST)
@@ -36,6 +40,7 @@ AWS에 배포한 애플리케이션 주소 : http://43.201.186.149/members/login
 ---
 ### 구현한 API의 동작을 촬영한 데모 영상 링크
 
+https://youtu.be/1E3XtL-hg2c
 
 ---
 ### 구현 방법 및 이유에 대한 간략한 설명
